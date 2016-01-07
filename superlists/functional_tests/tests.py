@@ -1,4 +1,5 @@
 from django.test import LiveServerTestCase
+
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 
@@ -33,17 +34,19 @@ class NewVisitorTest(LiveServerTestCase):
         self.assertIn('To-Do', self.browser.title)
 
         header_text = self.browser.find_element_by_tag_name('h1').text
+
         self.assertIn('To-Do', header_text)
 
         inputbox = self.browser.find_element_by_id('id_new_item')
+
         self.assertEqual(
             inputbox.get_attribute('placeholder'),
             'Enter a to-do item'
         )
 
         self.enter_a_new_item('Buy peacock feathers')
-
         edith_list_url = self.browser.current_url
+
         self.assertRegexpMatches(edith_list_url, '/lists/.+')
         self.check_for_row_in_list_table('1. Buy peacock feathers')
 
@@ -63,6 +66,7 @@ class NewVisitorTest(LiveServerTestCase):
 
         self.enter_a_new_item('Buy milk')
         francis_list_url = self.browser.current_url
+
         self.assertRegexpMatches(francis_list_url, '/lists/.+')
         self.assertNotEqual(francis_list_url, edith_list_url)
 

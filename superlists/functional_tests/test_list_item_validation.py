@@ -1,11 +1,8 @@
-from unittest import skip
-
 from .base import TodoFunctionalTest
 
 class ItemValidationTest(TodoFunctionalTest):
 
     def test_cannot_add_empty_list_item(self):
-
         self.browser.get(self.live_server_url)
         self.enter_a_new_item('')
 
@@ -23,5 +20,3 @@ class ItemValidationTest(TodoFunctionalTest):
         self.enter_a_new_item('Make tea')
         self.check_for_row_in_list_table('1. Buy milk\nDelete')
         self.check_for_row_in_list_table('2. Make tea\nDelete')
-
-        self.fail("Finish the test!")

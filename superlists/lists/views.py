@@ -4,7 +4,7 @@ from django.shortcuts import render, redirect
 from lists.models import Item, List
 
 def home_page(request):
-    return render(request, 'home.html')
+    return render(request, 'home.html', {'todo_lists': List.objects.all()})
 
 def new_list(request):
     new_list = List.objects.create()
@@ -36,7 +36,7 @@ def view_list(request, list_id):
         if request.POST.has_key('list_name'):
             list_.name = request.POST['list_name']
             list_.save()
-            
+
     # method == 'GET'
     return render(request, 'list.html', {'list': list_, 'error': error})
 
